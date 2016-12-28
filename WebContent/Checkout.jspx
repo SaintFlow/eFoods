@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="true" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Insert title here</title>
+<link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413"
+	media="screen, print" />
+</head>
+<body xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<header id="header">
+		<nav class="left">
+			<c:choose>
+				<c:when
+					test="${sessionScope.cart.cartItems != null and !empty sessionScope.cart.cartItems}">
+					<a href="${pageContext.request.contextPath}/Cart">(1) Cart</a> | 
+  				</c:when>
+				<c:otherwise>
+					<a href="${pageContext.request.contextPath}/Cart">Cart |</a>
+				</c:otherwise>
+			</c:choose>
+			<a href="${pageContext.request.contextPath}/Startup">Continue
+				Shopping</a>
+		</nav>
+		<a href="${pageContext.request.contextPath}/Startup" class="logo">Foods
+			R Us</a>
+
+		<nav class="right">
+			<form>
+				<c:choose>
+					<c:when test="${sessionScope.accountNumber == null}">
+						<input type="submit" name="loginAttempt" class="button alt"
+							value="Login" />
+					</c:when>
+					<c:otherwise>
+						<a href="${pageContext.request.contextPath}/Cart"> Logged in
+							as ${accountNumber }</a>
+					</c:otherwise>
+				</c:choose>
+			</form>
+		</nav>
+
+	</header>
+	<section id="main" class="wrapper">
+		<div class="inner">
+			<c:choose>
+
+				<c:when test="${sessionScope.cart == null}">
+  Your cart is empty. Please fill your cart with items before checking out.
+ </c:when>
+
+				<c:when test="${empty sessionScope.cart.cartItems}">
+	Your cart is empty. Please fill your cart with items before checking out.
+</c:when>
+				<c:otherwise>
+	Your order has been successfully processed. Click this link to view your order.<br />
+					<a href="xmlOrders${sessionScope.xmlLink }">View your order</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</section>
+	<footer id="footer">
+		<div class="inner">
+			<h2>Work in progress</h2>
+		</div>
+	</footer>
+</body>
+	</html>
+</jsp:root>
